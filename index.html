@@ -3,20 +3,20 @@
 <head>
   <!--
     Daily Wins
-    Copyright (c) 2026 Nadia Kidgell. All rights reserved.
+    Copyright (c) 2026 [YOUR NAME]. All rights reserved.
     See the LICENSE file in this repository.
   -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Daily Wins</title>
-  <meta name="description" content="A highlight reel of what you got done. Log your wins, keep your streak, celebrate the day's biggest win." />
+  <meta name="description" content="Celebrate your day with daily wins. Log what you finished, keep your streak, honour the day's biggest win." />
 
   <!-- Ask search engines not to index or follow this page. Honoured by Google, Bing, etc. Not a security control. -->
   <meta name="robots" content="noindex, nofollow" />
   <meta name="googlebot" content="noindex, nofollow" />
 
   <!-- Home-screen / app meta -->
-  <meta name="theme-color" content="#FFF7EC" />
+  <meta name="theme-color" content="#AED9E0" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -30,8 +30,8 @@
 
   <style>
     :root {
-      --bg:#FFF7EC; --surface:#FFFFFF; --ink:#2A2320; --soft:#9A8C7E;
-      --coral:#FF5B41; --gold:#FFB02E; --mint:#12B886; --line:#F0E6D8;
+      --bg:#AED9E0; --surface:#FFFFFF; --ink:#12333A; --soft:#5A7C85;
+      --coral:#FF5B41; --gold:#FFB02E; --teal:#185F6D; --line:#DCE8EB;
     }
     * { box-sizing: border-box; }
     html, body { margin:0; padding:0; }
@@ -47,7 +47,7 @@
     .dw-date { font-size:13px; color:var(--soft); font-weight:600; }
     .dw-tag { font-size:13.5px; color:var(--soft); margin:2px 0 18px; }
 
-    .dw-hero { background:var(--surface); border:1px solid var(--line); border-radius:26px; padding:22px; box-shadow:0 12px 34px rgba(255,91,65,0.10); }
+    .dw-hero { background:var(--surface); border:1px solid var(--line); border-radius:26px; padding:22px; box-shadow:0 12px 34px rgba(24,95,109,0.14); }
     .dw-hero-top { display:flex; align-items:center; justify-content:space-between; }
     .dw-streaklabel { font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.09em; color:var(--soft); }
     .dw-best { font-size:12px; font-weight:700; color:var(--coral); background:#FFEDE8; padding:5px 11px; border-radius:999px; }
@@ -60,15 +60,15 @@
     .dw-progress { display:flex; align-items:center; gap:12px; margin-top:18px; padding-top:16px; border-top:1px solid var(--line); }
     .dw-dots { display:flex; gap:7px; }
     .dw-dot { width:22px; height:22px; border-radius:50%; border:2px solid var(--line); transition:background .25s,border-color .25s,transform .25s; }
-    .dw-dot.on { background:var(--gold); border-color:var(--gold); }
-    .dw-dot.full { background:var(--mint); border-color:var(--mint); transform:scale(1.06); }
+    .dw-dot.on { background:var(--teal); border-color:var(--teal); }
+    .dw-dot.full { background:var(--teal); border-color:var(--teal); transform:scale(1.06); }
     .dw-progress-text { font-size:13.5px; font-weight:600; color:var(--soft); }
     .dw-progress-text strong { color:var(--ink); }
 
     .dw-add { display:flex; gap:8px; margin-top:18px; }
-    .dw-input { flex:1; min-width:0; border:1.5px solid var(--line); background:#FFFDF9; border-radius:14px; padding:13px 14px; font:inherit; font-size:16px; color:var(--ink); outline:none; transition:border-color .2s; }
+    .dw-input { flex:1; min-width:0; border:1.5px solid var(--line); background:#FFFFFF; border-radius:14px; padding:13px 14px; font:inherit; font-size:16px; color:var(--ink); outline:none; transition:border-color .2s; }
     .dw-input:focus { border-color:var(--coral); }
-    .dw-input::placeholder { color:#C8BBA9; }
+    .dw-input::placeholder { color:#A6BFC5; }
     .dw-addbtn { border:none; background:var(--coral); color:#fff; font:inherit; font-weight:700; font-size:15px; padding:0 20px; border-radius:14px; cursor:pointer; transition:transform .12s,background .2s; }
     .dw-addbtn:active { transform:scale(0.95); }
     .dw-addbtn:disabled { background:#F3D9D2; cursor:default; }
@@ -77,14 +77,14 @@
     .dw-wins { display:flex; flex-direction:column; gap:8px; }
     .dw-win { display:flex; align-items:center; gap:12px; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px 14px; animation:pop .28s ease; }
     .dw-win.is-best { background:linear-gradient(100deg,#FFF6E6,#FFFFFF); border-color:#FAD79A; box-shadow:0 4px 14px rgba(255,176,46,0.16); }
-    .dw-check { width:24px; height:24px; border-radius:50%; background:var(--mint); color:#fff; display:flex; align-items:center; justify-content:center; flex:0 0 auto; font-size:14px; font-weight:800; }
+    .dw-check { width:24px; height:24px; border-radius:50%; background:var(--teal); color:#fff; display:flex; align-items:center; justify-content:center; flex:0 0 auto; font-size:14px; font-weight:800; }
     .dw-wintext { flex:1; font-size:15px; font-weight:500; word-break:break-word; }
-    .dw-crown { flex:0 0 auto; width:30px; height:30px; border-radius:50%; border:none; cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; background:#F3ECE0; filter:grayscale(1) opacity(0.5); transition:filter .15s,background .15s,transform .12s; }
+    .dw-crown { flex:0 0 auto; width:30px; height:30px; border-radius:50%; border:none; cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; background:#E6EFF1; filter:grayscale(1) opacity(0.5); transition:filter .15s,background .15s,transform .12s; }
     .dw-crown:active { transform:scale(0.9); }
     .dw-crown.on { background:linear-gradient(150deg,var(--gold),var(--coral)); filter:none; box-shadow:0 3px 10px rgba(255,91,65,0.3); }
-    .dw-del { border:none; background:none; color:#CBBBA8; cursor:pointer; font-size:20px; line-height:1; padding:2px 4px; border-radius:8px; }
+    .dw-del { border:none; background:none; color:#A6BFC5; cursor:pointer; font-size:20px; line-height:1; padding:2px 4px; border-radius:8px; }
     .dw-del:active { color:var(--coral); }
-    .dw-empty { text-align:center; color:var(--soft); font-size:14.5px; padding:22px 14px; border:1.5px dashed var(--line); border-radius:16px; }
+    .dw-empty { text-align:center; color:var(--soft); font-size:14.5px; padding:22px 14px; border:1.5px dashed #8FB9C2; border-radius:16px; background:rgba(255,255,255,0.35); }
 
     .dw-week { display:grid; grid-template-columns:repeat(7,1fr); gap:7px; }
     .dw-day { display:flex; flex-direction:column; align-items:center; gap:7px; }
@@ -92,10 +92,21 @@
     .dw-tile { width:100%; aspect-ratio:1; border-radius:14px; display:flex; align-items:center; justify-content:center; font-family:'Bricolage Grotesque'; font-weight:800; font-size:18px; border:1.5px solid var(--line); background:var(--surface); color:var(--ink); position:relative; }
     .dw-tile.partial { background:#FFF3DF; border-color:#FCE3B8; color:#C98A14; }
     .dw-tile.hit { background:linear-gradient(150deg,var(--gold),var(--coral)); border-color:transparent; color:#fff; box-shadow:0 6px 15px rgba(255,91,65,0.30); }
-    .dw-tile.zero { color:#D8CBBB; }
+    .dw-tile.zero { color:#B9CDD2; }
     .dw-tile.today { outline:2.5px solid var(--ink); outline-offset:2px; }
     .dw-tile .star { position:absolute; top:-7px; right:-5px; font-size:13px; }
-    .dw-foot { text-align:center; font-size:11.5px; color:#C2B4A4; margin-top:22px; }
+    .dw-backup { background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:16px; }
+    .dw-backup-note { font-size:12.5px; color:var(--soft); line-height:1.45; margin-bottom:12px; }
+    .dw-backup-btns { display:flex; gap:8px; }
+    .dw-bbtn { flex:1; border:1.5px solid var(--teal); border-radius:13px; padding:12px 10px; font:inherit; font-weight:700; font-size:14px; cursor:pointer; transition:transform .12s, background .15s; }
+    .dw-bbtn.save { background:var(--teal); color:#fff; }
+    .dw-bbtn.restore { background:none; color:var(--teal); }
+    .dw-bbtn:active { transform:scale(0.97); }
+    .dw-backup-msg { font-size:12.5px; font-weight:600; margin-top:10px; min-height:0; }
+    .dw-backup-msg.ok { color:var(--teal); }
+    .dw-backup-msg.err { color:var(--coral); }
+
+    .dw-foot { text-align:center; font-size:11.5px; color:#5A7C85; margin-top:22px; }
 
     .dw-confetti { position:fixed; inset:0; pointer-events:none; z-index:50; }
     .dw-confetti span { position:absolute; top:-12px; width:9px; height:14px; border-radius:2px; animation:fall 1.5s ease-in forwards; }
@@ -105,7 +116,7 @@
     .dw-modal-eyebrow { font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--coral); }
     .dw-modal-title { font-family:'Bricolage Grotesque', sans-serif; font-weight:800; font-size:21px; letter-spacing:-0.02em; margin:6px 0 18px; line-height:1.15; }
     .dw-pick-list { display:flex; flex-direction:column; gap:9px; }
-    .dw-pick { display:flex; align-items:center; gap:11px; text-align:left; width:100%; border:1.5px solid var(--line); background:#FFFDF9; border-radius:14px; padding:14px; font:inherit; font-size:15px; font-weight:600; color:var(--ink); cursor:pointer; transition:border-color .15s,transform .12s,background .15s; }
+    .dw-pick { display:flex; align-items:center; gap:11px; text-align:left; width:100%; border:1.5px solid var(--line); background:#F8FBFC; border-radius:14px; padding:14px; font:inherit; font-size:15px; font-weight:600; color:var(--ink); cursor:pointer; transition:border-color .15s,transform .12s,background .15s; }
     .dw-pick:active { transform:scale(0.98); border-color:var(--gold); background:#FFF8EC; }
     .dw-pick-crown { font-size:18px; flex:0 0 auto; }
     .dw-skip { margin-top:14px; width:100%; border:none; background:none; color:var(--soft); font:inherit; font-size:13.5px; font-weight:600; cursor:pointer; padding:6px; }
@@ -132,7 +143,7 @@
         <div class="dw-title">Daily Wins</div>
         <div class="dw-date" id="date"></div>
       </div>
-      <div class="dw-tag">A highlight reel of what you got done.</div>
+      <div class="dw-tag">Celebrate your day with daily wins</div>
 
       <div class="dw-hero">
         <div class="dw-hero-top">
@@ -161,6 +172,17 @@
 
       <div class="dw-section-h">This week</div>
       <div class="dw-week" id="week"></div>
+
+      <div class="dw-section-h">Log My Wins</div>
+      <div class="dw-backup">
+        <div class="dw-backup-note">Keep a copy of your wins. Clearing your browser data will erase them otherwise.</div>
+        <div class="dw-backup-btns">
+          <button class="dw-bbtn save" id="savebtn">&#11015;&nbsp; Save a copy</button>
+          <button class="dw-bbtn restore" id="restorebtn">&#11014;&nbsp; Restore</button>
+        </div>
+        <input type="file" id="fileinput" accept="application/json,.json" hidden />
+        <div class="dw-backup-msg" id="backupmsg" role="status"></div>
+      </div>
 
       <div class="dw-foot">Saved on this device.</div>
     </div>
@@ -416,6 +438,65 @@
       root.appendChild(ov);
     }
 
+    // ---------- backup: save a copy / restore ----------
+    function flash(msg, ok) {
+      var el = byId("backupmsg");
+      el.textContent = msg;
+      el.className = "dw-backup-msg " + (ok ? "ok" : "err");
+      setTimeout(function () { if (el.textContent === msg) { el.textContent = ""; el.className = "dw-backup-msg"; } }, 5000);
+    }
+
+    function saveCopy() {
+      var total = Object.keys(data.winsByDate).reduce(function (s, k) { return s + data.winsByDate[k].length; }, 0);
+      if (total === 0) { flash("Nothing to save yet — log a win first.", false); return; }
+      var payload = { app: "daily-wins", version: 1, exportedAt: new Date().toISOString(), winsByDate: data.winsByDate, biggestByDate: data.biggestByDate };
+      var blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "daily-wins-backup-" + dateKey(new Date()) + ".json";
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      flash("Saved " + total + " win" + (total === 1 ? "" : "s") + " to your downloads.", true);
+    }
+
+    // Validate strictly — a malformed file must never overwrite good data.
+    function validBackup(p) {
+      if (!p || typeof p !== "object") return false;
+      if (!p.winsByDate || typeof p.winsByDate !== "object") return false;
+      var keys = Object.keys(p.winsByDate);
+      for (var i = 0; i < keys.length; i++) {
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(keys[i])) return false;
+        var list = p.winsByDate[keys[i]];
+        if (!Array.isArray(list)) return false;
+        for (var j = 0; j < list.length; j++) {
+          if (!list[j] || typeof list[j].text !== "string" || typeof list[j].id !== "string") return false;
+        }
+      }
+      return true;
+    }
+
+    function restoreFile(file) {
+      var reader = new FileReader();
+      reader.onload = function () {
+        var parsed;
+        try { parsed = JSON.parse(reader.result); }
+        catch (e) { flash("That file isn't a valid backup.", false); return; }
+        if (!validBackup(parsed)) { flash("That file isn't a Daily Wins backup.", false); return; }
+        var days = Object.keys(parsed.winsByDate).length;
+        var ok = window.confirm(
+          "Restore " + days + " day" + (days === 1 ? "" : "s") + " of wins?\n\n" +
+          "This replaces everything currently saved on this device."
+        );
+        if (!ok) { flash("Restore cancelled. Nothing changed.", true); return; }
+        data = { winsByDate: parsed.winsByDate, biggestByDate: parsed.biggestByDate || {} };
+        persist(); render();
+        flash("Restored " + days + " day" + (days === 1 ? "" : "s") + " of wins. 🎉", true);
+      };
+      reader.onerror = function () { flash("Couldn't read that file.", false); };
+      reader.readAsText(file);
+    }
+
     // ---------- wire up ----------
     byId("addbtn").addEventListener("click", addWin);
     byId("input").addEventListener("keydown", function (e) { if (e.key === "Enter") addWin(); });
@@ -423,6 +504,14 @@
     byId("todaywrap").addEventListener("click", function (e) {
       var del = e.target.closest("[data-del]"); if (del) { removeWin(del.getAttribute("data-del")); return; }
       var cr = e.target.closest("[data-crown]"); if (cr) { chooseBiggest(cr.getAttribute("data-crown")); }
+    });
+
+    byId("savebtn").addEventListener("click", saveCopy);
+    byId("restorebtn").addEventListener("click", function () { byId("fileinput").click(); });
+    byId("fileinput").addEventListener("change", function (e) {
+      var f = e.target.files && e.target.files[0];
+      if (f) restoreFile(f);
+      e.target.value = ""; // allow re-picking the same file
     });
 
     render();
