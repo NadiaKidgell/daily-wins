@@ -1,0 +1,7 @@
+# Daily Wins — request that search engines do not crawl or index this site.
+# Reputable crawlers (Google, Bing, DuckDuckGo) honour this.
+# Note: this is a request, not a security control. The page remains publicly reachable
+# to anyone who has the URL.
+
+User-agent: *
+Disallow: /
