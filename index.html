@@ -3,7 +3,7 @@
 <head>
   <!--
     Daily Wins
-    Copyright (c) 2026 Nadia Kidgell. All rights reserved.
+    Copyright (c) 2026 [YOUR NAME]. All rights reserved.
     See the LICENSE file in this repository.
   -->
   <meta charset="utf-8" />
@@ -31,7 +31,7 @@
   <style>
     :root {
       --bg:#AED9E0; --surface:#FFFFFF; --ink:#12333A; --soft:#5A7C85;
-      --coral:#FF3D24; --gold:#FFB02E; --teal:#185F6D; --line:#DCE8EB;
+      --coral:#C2410C; --gold:#FFB02E; --teal:#185F6D; --line:#DCE8EB;
     }
     * { box-sizing: border-box; }
     html, body { margin:0; padding:0; }
@@ -46,13 +46,14 @@
     .dw-title { font-family:'Bricolage Grotesque', system-ui, sans-serif; font-weight:800; font-size:30px; letter-spacing:-0.025em; }
     .dw-date { font-size:13px; color:var(--soft); font-weight:600; }
     .dw-tag { font-size:13.5px; color:var(--soft); margin:2px 0 18px; }
+    .dw-motto { text-align:left; font-size:14px; font-weight:700; line-height:1.5; color:var(--teal); margin:20px 0 4px; max-width:38ch; }
 
     .dw-hero { background:var(--surface); border:1px solid var(--line); border-radius:26px; padding:22px; box-shadow:0 12px 34px rgba(24,95,109,0.14); }
     .dw-hero-top { display:flex; align-items:center; justify-content:space-between; }
     .dw-streaklabel { font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.09em; color:var(--soft); }
     .dw-best { font-size:12px; font-weight:700; color:var(--coral); background:#FFEDE8; padding:5px 11px; border-radius:999px; }
     .dw-streak { display:flex; align-items:flex-end; gap:10px; margin-top:8px; }
-    .dw-flame { font-size:38px; line-height:1; padding-bottom:6px; filter:saturate(1.5) contrast(1.12) drop-shadow(0 0 9px rgba(255,110,40,0.55)); }
+    .dw-flame { font-size:38px; line-height:1; padding-bottom:6px; filter:saturate(1.5) contrast(1.12) drop-shadow(0 0 10px rgba(224,100,26,0.65)); }
     .dw-streaknum { font-family:'Bricolage Grotesque'; font-weight:800; font-size:60px; line-height:0.9; letter-spacing:-0.04em; }
     .dw-streakunit { font-size:15px; font-weight:600; color:var(--soft); padding-bottom:9px; }
     .dw-substat { font-size:13px; font-weight:600; color:var(--soft); margin-top:8px; }
@@ -65,14 +66,13 @@
     .dw-progress-text { font-size:13.5px; font-weight:600; color:var(--soft); }
     .dw-progress-text strong { color:var(--ink); }
 
-    .dw-motto { text-align:center; font-size:13.5px; font-weight:600; line-height:1.5; color:var(--teal); margin:18px 6px 2px; }
-    .dw-add { display:flex; gap:8px; margin-top:14px; }
+    .dw-add { display:flex; gap:8px; margin-top:18px; }
     .dw-input { flex:1; min-width:0; border:1.5px solid var(--line); background:#FFFFFF; border-radius:14px; padding:13px 14px; font:inherit; font-size:16px; color:var(--ink); outline:none; transition:border-color .2s; }
     .dw-input:focus { border-color:var(--coral); }
     .dw-input::placeholder { color:#A6BFC5; }
     .dw-addbtn { border:none; background:var(--coral); color:#fff; font:inherit; font-weight:700; font-size:15px; padding:0 20px; border-radius:14px; cursor:pointer; transition:transform .12s,background .2s; }
     .dw-addbtn:active { transform:scale(0.95); }
-    .dw-addbtn:disabled { background:#FFD3CA; cursor:default; }
+    .dw-addbtn:disabled { background:var(--coral); opacity:1; cursor:default; }
 
     .dw-section-h { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:var(--soft); margin:26px 0 12px; }
     .dw-wins { display:flex; flex-direction:column; gap:8px; }
@@ -91,8 +91,8 @@
     .dw-day { display:flex; flex-direction:column; align-items:center; gap:7px; }
     .dw-dl { font-size:11px; font-weight:700; color:var(--soft); }
     .dw-tile { width:100%; aspect-ratio:1; border-radius:14px; display:flex; align-items:center; justify-content:center; font-family:'Bricolage Grotesque'; font-weight:800; font-size:18px; border:1.5px solid var(--line); background:var(--surface); color:var(--ink); position:relative; }
-    .dw-tile.partial { background:#FFF3DF; border-color:#FCE3B8; color:#C98A14; }
-    .dw-tile.hit { background:linear-gradient(150deg,var(--gold),var(--coral)); border-color:transparent; color:#fff; box-shadow:0 6px 15px rgba(255,91,65,0.30); }
+    .dw-tile.partial { background:#FFF3DF; border-color:#FCE3B8; color:#8A5A08; }
+    .dw-tile.hit { background:linear-gradient(150deg,#E0641A,#B3300F); border-color:transparent; color:#fff; box-shadow:0 6px 15px rgba(178,48,15,0.32); }
     .dw-tile.zero { color:#B9CDD2; }
     .dw-tile.today { outline:2.5px solid var(--ink); outline-offset:2px; }
     .dw-tile .star { position:absolute; top:-7px; right:-5px; font-size:13px; }
@@ -134,7 +134,23 @@
     @keyframes fall { to { transform:translateY(105vh) rotate(360deg); opacity:0; } }
     @keyframes fadein { from { opacity:0; } to { opacity:1; } }
     @keyframes scalein { from { opacity:0; transform:translateY(8px) scale(0.96); } to { opacity:1; transform:none; } }
-    @media (prefers-reduced-motion: reduce) { *{ animation:none !important; transition:none !important; } .dw-confetti{ display:none; } }
+    .dw-spark { position:fixed; pointer-events:none; z-index:55; width:0; height:0; }
+    .dw-spark i { position:absolute; display:block; border-radius:50%; will-change:transform,opacity; animation:spark var(--dur,1s) cubic-bezier(.12,.62,.28,1) forwards; }
+    .dw-spark i.streak { border-radius:2px; }
+    @keyframes spark {
+      0%   { transform:translate(0,0) scale(0.5); opacity:1; }
+      12%  { transform:translate(calc(var(--sx) * 0.22), calc(var(--sy) * 0.22)) scale(1.15); opacity:1; }
+      70%  { opacity:1; }
+      100% { transform:translate(var(--sx), calc(var(--sy) + var(--drop))) scale(0.35); opacity:0; }
+    }
+    .dw-ring { position:fixed; pointer-events:none; z-index:54; border-radius:50%; border:3px solid var(--coral); transform:translate(-50%,-50%) scale(0.2); opacity:0.9; animation:ring .72s cubic-bezier(.1,.7,.25,1) forwards; }
+    @keyframes ring { to { transform:translate(-50%,-50%) scale(1); opacity:0; border-width:1px; } }
+    .dw-flash { position:fixed; pointer-events:none; z-index:53; width:120px; height:120px; border-radius:50%; transform:translate(-50%,-50%) scale(0.3); background:radial-gradient(circle, rgba(255,196,120,0.85) 0%, rgba(224,100,26,0.35) 45%, rgba(224,100,26,0) 70%); animation:flash .5s ease-out forwards; }
+    @keyframes flash { to { transform:translate(-50%,-50%) scale(1.5); opacity:0; } }
+    .dw-addbtn.pulse { animation:btnpulse .34s ease; }
+    @keyframes btnpulse { 0%{transform:scale(1);} 40%{transform:scale(1.13);} 100%{transform:scale(1);} }
+
+    @media (prefers-reduced-motion: reduce) { *{ animation:none !important; transition:none !important; } .dw-confetti{ display:none; } .dw-spark{ display:none; } }
   </style>
 </head>
 <body>
@@ -144,7 +160,7 @@
         <div class="dw-title">Daily Wins</div>
         <div class="dw-date" id="date"></div>
       </div>
-      <div class="dw-tag"></b>Every small step builds the momentum that shapes your biggest achievements.</div>
+      <div class="dw-tag">Celebrate your daily wins</div>
 
       <div class="dw-hero">
         <div class="dw-hero-top">
@@ -163,11 +179,11 @@
         </div>
       </div>
 
-      <div class="dw-motto">Record Today's Wins</div>
+      <div class="dw-motto">Every small step builds the momentum that shapes your biggest achievements.</div>
 
       <div class="dw-add">
         <input class="dw-input" id="input" placeholder="What did you finish?" aria-label="Add a win" autocomplete="off" />
-        <button class="dw-addbtn" id="addbtn" disabled>Add</button>
+        <button class="dw-addbtn" id="addbtn">Add</button>
       </div>
 
       <div class="dw-section-h">Today's wins</div>
@@ -196,7 +212,7 @@
     var STORAGE_KEY = "daily-wins:data";
     var TARGET = 3;
     var WD = ["S","M","T","W","T","F","S"];
-    var COLORS = ["#FF5B41","#FFB02E","#12B886","#7C5CFF","#FF8FB1"];
+    var COLORS = ["#C2410C","#E0641A","#FFB02E","#185F6D","#FF8FB1"];
 
     var AFFIRMATIONS = [
       "You showed up and you tried, and trying is the bravest thing a person does all day.",
@@ -345,7 +361,7 @@
     function addWin() {
       var inp = byId("input");
       var text = inp.value.trim();
-      if (!text) return;
+      if (!text) { inp.focus(); return; }
       var tk = dateKey(new Date());
       var list = data.winsByDate[tk] || [];
       var crossing = list.length === TARGET - 1;
@@ -354,8 +370,13 @@
       next.push({ id: uid(), text: text });
       data.winsByDate[tk] = next;
       persist(); render();
-      inp.value = ""; byId("addbtn").disabled = true; inp.focus();
-      if (crossing) { confetti(); if (!alreadyBest) setTimeout(openPicker, 350); }
+      inp.value = ""; inp.focus();
+      if (crossing) {
+        confetti();
+        if (!alreadyBest) setTimeout(openPicker, 350);
+      } else {
+        sparkBurst(byId("addbtn"));
+      }
     }
     function removeWin(id) {
       var tk = dateKey(new Date());
@@ -374,6 +395,58 @@
     }
 
     // ---------- confetti + modals ----------
+    // Small burst from the button on every win. Deliberately modest —
+    // the full confetti stays reserved for hitting the 3-win target.
+    function sparkBurst(el) {
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      var r = el.getBoundingClientRect();
+      var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+
+      var flash = document.createElement("div");
+      flash.className = "dw-flash";
+      flash.style.left = cx + "px"; flash.style.top = cy + "px";
+      flash.setAttribute("aria-hidden", "true");
+      document.body.appendChild(flash);
+
+      var ring = document.createElement("div");
+      ring.className = "dw-ring";
+      ring.style.left = cx + "px"; ring.style.top = cy + "px";
+      ring.style.width = "190px"; ring.style.height = "190px";
+      ring.setAttribute("aria-hidden", "true");
+      document.body.appendChild(ring);
+
+      var box = document.createElement("div");
+      box.className = "dw-spark";
+      box.style.left = cx + "px"; box.style.top = cy + "px";
+      box.setAttribute("aria-hidden", "true");
+
+      var n = 30;
+      for (var i = 0; i < n; i++) {
+        var s = document.createElement("i");
+        var ang = (i / n) * Math.PI * 2 + (Math.random() - 0.5) * 0.3;
+        var dist = 80 + Math.random() * 110;
+        var size = 4 + Math.random() * 6;
+        if (i % 4 === 0) s.className = "streak";
+        s.style.width = size + "px";
+        s.style.height = (s.className === "streak" ? size * 2.1 : size) + "px";
+        s.style.setProperty("--sx", (Math.cos(ang) * dist).toFixed(1) + "px");
+        s.style.setProperty("--sy", (Math.sin(ang) * dist).toFixed(1) + "px");
+        s.style.setProperty("--drop", (30 + Math.random() * 55).toFixed(0) + "px");
+        s.style.setProperty("--dur", (0.85 + Math.random() * 0.5).toFixed(2) + "s");
+        s.style.background = COLORS[i % COLORS.length];
+        s.style.animationDelay = (Math.random() * 0.07).toFixed(3) + "s";
+        box.appendChild(s);
+      }
+      document.body.appendChild(box);
+
+      el.classList.remove("pulse");
+      void el.offsetWidth;
+      el.classList.add("pulse");
+
+      setTimeout(function () { flash.remove(); ring.remove(); }, 800);
+      setTimeout(function () { box.remove(); el.classList.remove("pulse"); }, 1500);
+    }
+
     function confetti() {
       var c = document.createElement("div");
       c.className = "dw-confetti"; c.setAttribute("aria-hidden", "true");
@@ -503,7 +576,6 @@
     // ---------- wire up ----------
     byId("addbtn").addEventListener("click", addWin);
     byId("input").addEventListener("keydown", function (e) { if (e.key === "Enter") addWin(); });
-    byId("input").addEventListener("input", function (e) { byId("addbtn").disabled = !e.target.value.trim(); });
     byId("todaywrap").addEventListener("click", function (e) {
       var del = e.target.closest("[data-del]"); if (del) { removeWin(del.getAttribute("data-del")); return; }
       var cr = e.target.closest("[data-crown]"); if (cr) { chooseBiggest(cr.getAttribute("data-crown")); }
